@@ -611,25 +611,25 @@
 
         function drag(e) {
             if (!isDragging) return;
-    
+            
             const deltaY = startY - e.clientY;
-            let newBottom = startBottom - deltaY;  // <-- ИЗМЕНЕНО: было + deltaY
-    
+            let newBottom = startBottom + deltaY;
+            
             // Ограничения
             if (newBottom < 70) newBottom = 70;
             if (newBottom > 70 + MAX_PULL) newBottom = 70 + MAX_PULL;
-    
+            
             leverHandle.style.bottom = newBottom + 'px';
-    
+            
             // Проверка на активацию
             if (newBottom >= 70 + TRIGGER_PULL && !leverHandle.dataset.activated) {
-               leverHandle.dataset.activated = 'true';
-               leverHandle.style.background = 'linear-gradient(145deg, #00ff88, #00cc66)';
+                leverHandle.dataset.activated = 'true';
+                leverHandle.style.background = 'linear-gradient(145deg, #00ff88, #00cc66)';
             } else if (newBottom < 70 + TRIGGER_PULL) {
                 leverHandle.dataset.activated = '';
                 leverHandle.style.background = '';
-                }
             }
+        }
 
         function endDrag() {
             if (!isDragging) return;
